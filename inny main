@@ -13,10 +13,12 @@ int main()
 	//PARAMETRY
 	char zasady_azotowe[4] = { 'A', 'T', 'C', 'G' };
 	int dlugosc_DNA = 800;
+	char tab1[800] = { 0 };
+	char tab2[800] = { 0 };
 	int dlugosc_okienka = 7;
 	float procent_pozytywnych = 0;
 	float procent_negatywnych = 0;
-	
+
 	//GENEROWANIE LANCUCHA DNA
 	vector<char>lancuch_DNA;
 	int rand_index;
@@ -24,9 +26,11 @@ int main()
 	cout << "Wygenerowany lancuch: " << endl;
 	for (int i = 0; i < dlugosc_DNA; i++)
 	{
-		rand_index = rand() %  + 4;
+		rand_index = rand() % +4;
 		lancuch_DNA.push_back(zasady_azotowe[rand_index]);
+		tab1[i] = lancuch_DNA[i];
 		cout << lancuch_DNA[i] << " ";
+		//cout << tab1[i] << " ";
 	}
 
 	//GENEROWANIE OKIENEK
@@ -59,13 +63,13 @@ int main()
 
 		cout << endl;
 	}*/
-	
+
 	//GENEROWANIE BLEDOW NEGATYWNYCH - USUWANIE NUKLEOTYDOW
 	float liczba_bledow_negatywnych = round(liczba_okienek * (procent_negatywnych / 100));
 	for (int i = 0; i < liczba_bledow_negatywnych; i++)
 	{
-		rand_index = rand() % + (liczba_okienek-1);
-		okienka.erase(okienka.begin() + rand_index); 
+		rand_index = rand() % +(liczba_okienek - 1);
+		okienka.erase(okienka.begin() + rand_index);
 		liczba_okienek--;
 	}
 	dlugosc_DNA = dlugosc_DNA - liczba_bledow_negatywnych;
@@ -77,7 +81,7 @@ int main()
 	{
 		for (int j = 0; j < dlugosc_okienka; j++) //generowanie losowego okienka
 		{
-			rand_index = rand() % + 4;
+			rand_index = rand() % +4;
 			okienka_temp.push_back(zasady_azotowe[rand_index]);
 		}
 		okienka.push_back(okienka_temp);
@@ -103,8 +107,8 @@ int main()
 
 	for (int i = 0; i < pomoc2; i++)
 	{
-		rand_index = rand() % + (liczba_okienek);
-		
+		rand_index = rand() % +(liczba_okienek);
+
 		for (auto it = okienka[rand_index].begin(); it != okienka[rand_index].end(); it++)
 		{
 			if (pomoc == dlugosc_okienka - 1)
@@ -117,16 +121,32 @@ int main()
 		okienka.erase(okienka.begin() + rand_index);
 		liczba_okienek--;
 	}
-	
-	
-	
+
+
+
 	//wypisanie wyniku
 	cout << endl << endl;
 	for (int i = 0; i < dlugosc_DNA; i++)
 	{
+		tab2[i] = wynik_DNA[i];
 		cout << wynik_DNA[i] << " ";
+		//cout << tab2[i] << " ";
 	}
-	
+
+
+	//porównanie tabilc (lancuchow)
+	int licznik = 0;
+	for (int i = 0; i < dlugosc_DNA; i++)
+	{
+		if (tab1[i] != tab2[i])
+		{
+			licznik++;
+		}
+	}
+
+	float zgodnosc = 0; //w %
+	zgodnosc = 100.0 - ((float(licznik) * 100.0) / float(dlugosc_DNA));
+	cout << endl << endl << "Zgodnosc sekwencji wynosi: " << zgodnosc << "%" << endl;
 
 	return 0;
 }//END (main)
