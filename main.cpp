@@ -184,6 +184,11 @@ int main() {
             }
         }
 
+        
+        // ponizej trzebaby te metaheurystyke dodac, bo w petli ponizej tylko wg najnizszej wagi jest dodawane. A powinno dla kazdego wierzcholka sprawdzac kilka alternatywnych sciezek, chyba. ew. zostawic tak i dodac parametr "feromony", ktory np. dodawalby dodatkowe pozycje do wektora z wagami wierzcholkow i ich id (duplikaty). wtedy byloby latwiej natrafic na fragment tej sciezki ktora sie juz kiedys przeszlo.
+        
+        
+        
             for (auto &el: waga_wierzcholkow) {
                 if (el == min_waga) {
                     wymieszane_wierzcholki = waga_wierzcholkow;
